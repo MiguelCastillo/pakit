@@ -37,7 +37,6 @@
     "bit-loader-httpresource": "^1.0.1",
     "bit-loader-js": "^1.2.2",
     "bit-loader-json": "^1.1.4",
-    "eslint-plugin-react": "^6.8.0",
     "fs-extra": "^1.0.0",
     "grunt": "^1.0.1",
     "resolve": "^1.2.0",
