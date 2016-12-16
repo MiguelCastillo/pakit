@@ -1,6 +1,7 @@
 var fs = require("fs-extra");
 var path = require("path");
 var resolve = require("resolve");
+var handlebars = require("handlebars");
 var cwd = process.cwd();
 
 var Bitbundler = requireModule("bit-bundler");
@@ -44,21 +45,22 @@ function createBundler(options) {
     bundler: {
       plugins: [
         // splitter("dist/vendor.js", { match: { path: /\/node_modules\// } }),
-        // minifyjs({ banner: buildBannerString() }),
-        // extractsm()
+        minifyjs({ banner: buildBannerString() }),
+        extractsm()
       ]
     }
   });
 }
 
-// function buildBannerString() {
-//   var date = new Date();
-//   var pkg = {};
-//   try { pkg = require(path.join(process.cwd(), "package")); }
-//   catch(e) {}
-//   return grunt.template.process("/*! <%= pkg.name %> v<%= pkg.version %> - <%= date %>. (c) <%= date.getFullYear() %> <%= pkg.author %>. Licensed under <%= pkg.license %> */", { data: { pkg: pkg }});
-// }
+function buildBannerString() {
+  var date = new Date();
+  var pkg = {};
+  try { pkg = require(path.join(process.cwd(), "package")); }
+  catch(e) {}
 
+  var template = handlebars.compile("/*! {{ pkg.name }} v{{ pkg.version }} - {{ date }}. (c) {{ fullYear }} {{{ pkg.author }}}. Licensed under {{ pkg.license }} */");
+  return template({pkg: pkg, date: date, fullYear: date.getFullYear()});
+}
 
 function requireModule(name) {
   var modulePath;
