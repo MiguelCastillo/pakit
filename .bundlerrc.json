@@ -1,0 +1,10 @@
+{
+  "excludes": [],
+  "extensions": ["js", "css", "json"],
+  "eslint": { "extensions": ["js"] },
+  "js": { "extensions": ["js"] },
+  "css": { "extensions": ["css"] },
+  "json": { "extensions": ["json"] },
+  "httpResources": {},
+  "babel": {}
+}
