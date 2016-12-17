@@ -23,6 +23,12 @@ By default pakit will write `dist/out.js` and `dist/out.js.map`. But you can cha
 $ pikit src/file-1.js src/file-2.js --out dist/bundle.js
 ```
 
+And perhaps you are also want file watching
+
+```
+$ pikit src/file-1.js src/file-2.js --out dist/bundle.js --watch
+```
+
 
 # stack and features
 
@@ -33,6 +39,7 @@ $ pikit src/file-1.js src/file-2.js --out dist/bundle.js
 - It will handle JSON and CSS assets.
 - It will handle *most* node builtin modules.
 - It will handle bundle splitting.
+- It will do file watching.
 - Configurable via `.bundlerrc.json`.
 
 
