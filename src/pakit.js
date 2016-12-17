@@ -21,7 +21,7 @@ var babelCore = requireModule("babel-core");
 
 // Config file
 var config = require(path.join(__dirname, "../", ".bundlerrc.json"));
-try { config = require(path.join(cwd, ".bundlerrc.json")); }
+try { config = Object.assign({}, config, require(path.join(cwd, ".bundlerrc.json"))); }
 catch(e) {}
 
 function createBundler(options) {
