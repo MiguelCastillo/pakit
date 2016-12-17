@@ -45,7 +45,7 @@ $ pakit src/file-1.js src/file-2.js --out dist/bundle.js --watch
 
 # optin dependencies
 
-You do not need to install any dependencies in your project for `pakit` to work. Meaning, you do not need to install/maintain `babel` or `eslint` unless you really want to. `pakit` accomplishes it this by first trying to use dependencies from your project. And if those dependencies aren't found, then `pakit` will use its own dependencies. This provides an *optin* system for managing your own setup if you wanted more control of the situation.
+You do not need to install any dependencies in your project for `pakit` to work. Meaning, you do not need to install/maintain `babel` or `eslint` unless you really want to. `pakit` accomplishes this by first trying to use dependencies from your project. Any dependencies that aren't found in your project `pakit` will subtitute with its own. This creates an *optin* system if you want to take more granular control of the situation by simply installing in your project the dependencies you want to manage.
 
 
 # .bundlerrc.json
@@ -69,6 +69,11 @@ This is a sample configuration where pakit will split out all your vendor files 
 You can match other things like module names or even source content.
 
 > All matchers are internally converted to regular expressions with the exception of `extensions`, which is processed as a string.
+
+
+## babel and presets
+
+Babel is not configured with any presets. So in order to configure transpilation for ES2015, React, or any other feature, you will need to configure a .babelrc file and manager your own `babel` preset and plugin dependencies.
 
 
 # TODO

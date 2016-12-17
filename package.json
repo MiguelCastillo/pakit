@@ -38,7 +38,6 @@
     "bit-loader-js": "^1.2.2",
     "bit-loader-json": "^1.1.4",
     "fs-extra": "^1.0.0",
-    "grunt": "^1.0.1",
     "handlebars": "^4.0.6",
     "resolve": "^1.2.0",
     "subarg": "^1.0.0"
