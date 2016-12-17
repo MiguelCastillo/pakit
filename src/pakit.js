@@ -60,10 +60,9 @@ function configureShards(options) {
 }
 
 function configureSplitterOptions(name, options) {
-  // this is specifically to convert all module path pattern matching to be
-  // a regex since that's the most common use case.
+  // this is specifically to convert all string matching rules to be regexps
   if (typeof options === "string") {
-    return name === "path" ? new RegExp(options) : options;
+    return name === "extensions" ? options : new RegExp(options);
   }
 
   return Object.keys(options).reduce(function(result, option) {
