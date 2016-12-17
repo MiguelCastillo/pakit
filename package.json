@@ -2,7 +2,7 @@
   "name": "pakit",
   "version": "0.0.4",
   "description": "really opinionated and flexible JS bundler",
-  "main": "index.js",
+  "main": "src/pakit.js",
   "bin": {
     "pakit": "./bin/cli.js"
   },
