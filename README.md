@@ -14,19 +14,19 @@ $ npm install -g pakit
 ## cli
 
 ```
-$ pikit src/file-1.js src/file-2.js
+$ pakit src/file-1.js src/file-2.js
 ```
 
 By default pakit will write `dist/out.js` and `dist/out.js.map`. But you can change the output
 
 ```
-$ pikit src/file-1.js src/file-2.js --out dist/bundle.js
+$ pakit src/file-1.js src/file-2.js --out dist/bundle.js
 ```
 
 And perhaps you are also want file watching
 
 ```
-$ pikit src/file-1.js src/file-2.js --out dist/bundle.js --watch
+$ pakit src/file-1.js src/file-2.js --out dist/bundle.js --watch
 ```
 
 
