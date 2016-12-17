@@ -73,4 +73,4 @@ You can match other things like module names or even source content.
 
 # TODO
 
-- Auto splitting when detecting `System.import()` or `import()` methods, which are targetted for dynamic module loading.
+- Auto splitting when detecting `System.import()` or `import()` methods, which are targeted for dynamic module loading.
