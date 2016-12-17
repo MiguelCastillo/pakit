@@ -91,9 +91,3 @@ $ npm install babel-preset-es2015 babel-preset-react --save-dev
   "presets": ["es2015", "react"]
 }
 ```
-
-
-
-# TODO
-
-- Auto splitting when detecting `System.import()` or `import()` methods, which are targeted for dynamic module loading.
