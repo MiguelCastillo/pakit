@@ -43,13 +43,33 @@ function createBundler(options) {
       ]
     },
     bundler: {
-      plugins: [
-        // splitter("dist/vendor.js", { match: { path: /\/node_modules\// } }),
+      plugins: configureShards(settings.shards).concat([
         minifyjs({ banner: buildBannerString() }),
         extractsm()
-      ]
+      ])
     }
   });
+}
+
+function configureShards(options) {
+  return Object.keys(options || {}).map(function(name) {
+    // Sample config
+    // splitter("dist/vendor.js", { match: { path: /\/node_modules\// } })
+    return splitter(name, configureSplitterOptions(name, options[name]));
+  });
+}
+
+function configureSplitterOptions(name, options) {
+  // this is specifically to convert all module path pattern matching to be
+  // a regex since that's the most common use case.
+  if (typeof options === "string") {
+    return name === "path" ? new RegExp(options) : options;
+  }
+
+  return Object.keys(options).reduce(function(result, option) {
+    result[option] = configureSplitterOptions(option, options[option]);
+    return result;
+  }, {});
 }
 
 function buildBannerString() {
