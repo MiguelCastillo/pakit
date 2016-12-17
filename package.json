@@ -1,7 +1,7 @@
 {
   "name": "pakit",
   "version": "0.0.1",
-  "description": "really opinionated JS bundler Edit",
+  "description": "really opinionated and flexible JS bundler",
   "main": "index.js",
   "bin": {
     "pakit": "./bin/cli.js"
