@@ -55,6 +55,11 @@ function configureShards(options) {
   return Object.keys(options || {}).map(function(name) {
     // Sample config
     // splitter("dist/vendor.js", { match: { path: /\/node_modules\// } })
+    // The input config can a string and it will be coerced to a match.path matcher
+    if (typeof options[name] === "string") {
+      options[name] = { match: { path: options[name] } };
+    }
+
     return splitter(name, configureSplitterOptions(name, options[name]));
   });
 }
