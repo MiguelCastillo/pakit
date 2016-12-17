@@ -1,7 +1,7 @@
 # pakit
 really opinionated and flexible JS bundler
 
-pakit provides a very specific set of tools and configurations to remove the need for customizations for a great out of the box experience. Just give pakit the file(s) you want paked up, and you get the minified output with sourcemaps.
+pakit provides a very specific set of tools and *default* configurations for a great out of the box experience. Just give pakit the file(s) you want paked up, and you get the minified output with sourcemaps.
 
 # usage
 
