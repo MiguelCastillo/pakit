@@ -33,7 +33,7 @@ $ pakit src/file-1.js src/file-2.js --out dist/bundle.js --watch
 # stack and features
 
 - [eslint](http://eslint.org/) to lint your code when it is being paked. Supports `.eslintrc.json` config files.
-- [babel](https://babeljs.io/) to transform your JavaScript files. Supports `.babelrc` config files. Please do use this to extend your setup.
+- [babel](https://babeljs.io/) to transform your JavaScript files. Supports `.babelrc` config files.
 - [uglify](https://github.com/mishoo/UglifyJS2) to minify your paked files.
 - It will handle dependencies defined with CJS require and ES2015 import statements.
 - It will handle JSON and CSS assets.
@@ -56,35 +56,51 @@ The default setup is defined in this [.bundlerrc.json](https://github.com/Miguel
 
 ## shards
 
-This is a sample configuration where pakit will split out all your vendor files into `dist/vendor.js` file.
+This is bundle splitting in which every chunk that is split out is called a shard.
+
+Below is a sample configuration where pakit will split all modules with `/node_modules/` in its path out into a shard file `dist/vendor.js`. Effectively splitting out all vendor (3rd party) dependencies into its own bundle file.
 
 ``` javascript
 {
   "shards": {
-    "dist/vendor.js": { "match": { "path": "/node_modules/" } }
+    "dist/vendor.js": "/node_modules/"
   }
 }
 ```
 
-You can match other things like module names or even source content.
+Bundle splitting is fundamentally based on pattern matching. Meaning that you can build matching rules that determine how bundles are split up. The example below splits out modules that match the names "jquery" and "react".
 
-> All matchers are internally converted to regular expressions with the exception of `extensions`, which is processed as a string.
+``` javascript
+{
+  "shards": {
+    "dist/requery.js": {
+      "match": {
+        "name": ["jquery", "react"]
+      }
+    }
+  }
+}
+```
+
+Matching rules can match anything in a Module instance, including the `source`.
+
+> All matchers are internally converted to regular expressions with the exception of `extensions`, which are processed as a string.
 
 
-## babel and presets
+## babel presets and plugins
 
-Babel is not configured with any presets. So in order to configure transpilation for ES2015, React, or any other feature, you will need to configure a .babelrc file and manager your own `babel` preset and plugin dependencies.
+While pakit wires in `babel`, it is not configured with any presets or plugins. So in order to configure transpilation for ES2015, React, or any other feature, you will need to configure a `.babelrc` file in your project and manage your own `babel` preset and plugin dependencies.
 
-Quick guide:
+### Quick guide:
 
-### install dependencies for ES2015 and React
+#### install dependencies for ES2015 and React
 
 ```
 $ npm install babel-preset-es2015 babel-preset-react --save-dev
 ```
 
 
-### configure a `.babelrc` in your project
+#### configure a `.babelrc` in your project
 
 ```
 {
