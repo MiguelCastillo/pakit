@@ -75,6 +75,24 @@ You can match other things like module names or even source content.
 
 Babel is not configured with any presets. So in order to configure transpilation for ES2015, React, or any other feature, you will need to configure a .babelrc file and manager your own `babel` preset and plugin dependencies.
 
+Quick guide:
+
+### install dependencies for ES2015 and React
+
+```
+$ npm install babel-preset-es2015 babel-preset-react --save-dev
+```
+
+
+### configure a `.babelrc` in your project
+
+```
+{
+  "presets": ["es2015", "react"]
+}
+```
+
+
 
 # TODO
 
