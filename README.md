@@ -59,9 +59,9 @@ This is a sample configuration where pakit will split out all your vendor files 
 }
 ```
 
-You can match other things like the name of modules or even source content.
+You can match other things like module names or even source content.
 
-> All matchers are processed as regexps with the exception of `name`, which is processed as a strict equal.
+> All matchers are internally converted to regular expressions with the exception of `extensions`, which is processed as a string.
 
 
 # TODO
