@@ -89,7 +89,7 @@ Matching rules can match anything in a Module instance, including the `source`.
 
 ## umd
 
-When bundles are written for the browser, please use `umd` for better compatibility among module systems. This will ensure AMD, CJS, and plain ole globals exposed depdending on the module system that is available.
+When bundles are written for the browser, please use `umd` for better compatibility among module systems. This will ensure that the bundle exposes the main modules as AMD, CJS, or plain ole global depdending on the module system that is available.
 
 ```
 {
