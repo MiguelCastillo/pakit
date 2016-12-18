@@ -28,6 +28,7 @@ function createBundler(options) {
   settings = Object.assign({}, config, options);
 
   return new Bitbundler({
+    umd: settings.umd,
     watch: settings.watch,
     loader: {
       plugins: [
