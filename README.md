@@ -87,6 +87,17 @@ Matching rules can match anything in a Module instance, including the `source`.
 > All matchers are internally converted to regular expressions with the exception of `extensions`, which are processed as a string.
 
 
+## umd
+
+When bundles are written for the browser, please use `umd` for better compatibility among module systems. This will ensure AMD, CJS, and plain ole globals exposed depdending on the module system that is available.
+
+```
+{
+  "umd": "myModuleName"
+}
+```
+
+
 ## babel presets and plugins
 
 While pakit wires in `babel`, it is not configured with any presets or plugins. So in order to configure transpilation for ES2015, React, or any other feature, you will need to configure a `.babelrc` file in your project and manage your own `babel` preset and plugin dependencies.
