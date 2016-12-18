@@ -63,7 +63,7 @@ Below is a sample configuration where pakit will split all modules with `/node_m
 ``` javascript
 {
   "shards": {
-    "dist/vendor.js": "/node_modules/"
+    "dist/vendor.js": ["/node_modules/"]
   }
 }
 ```
