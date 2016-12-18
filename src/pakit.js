@@ -57,7 +57,7 @@ function configureShards(options) {
     // Sample config
     // splitter("dist/vendor.js", { match: { path: /\/node_modules\// } })
     // The input config can a string and it will be coerced to a match.path matcher
-    if (typeof options[name] === "string") {
+    if (typeof options[name] === "string" || options[name] instanceof Array) {
       options[name] = { match: { path: options[name] } };
     }
 
@@ -67,8 +67,10 @@ function configureShards(options) {
 
 function configureSplitterOptions(name, options) {
   // this is specifically to convert all string matching rules to be regexps
-  if (typeof options === "string") {
-    return name === "extensions" ? options : new RegExp(options);
+  if (typeof options === "string" || options instanceof Array) {
+    return name === "extensions" ?
+          options :
+          [].concat(options).map(function(opt) { return new RegExp(opt); });
   }
 
   return Object.keys(options).reduce(function(result, option) {
