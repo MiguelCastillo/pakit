@@ -35,11 +35,12 @@ $ pakit src/file-1.js src/file-2.js --out dist/bundle.js --watch
 - [eslint](http://eslint.org/) to lint your code when it is being paked. Supports `.eslintrc.json` config files.
 - [babel](https://babeljs.io/) to transform your JavaScript files. Supports `.babelrc` config files.
 - [uglify](https://github.com/mishoo/UglifyJS2) to minify your paked files.
-- It will handle dependencies defined with CJS require and ES2015 import statements.
-- It will handle JSON and CSS assets.
-- It will handle *most* node builtin modules.
-- It will handle bundle splitting.
-- It will do file watching.
+- It will handle
+  - dependencies defined with CJS require and ES2015 import statements.
+  - JSON and CSS assets.
+  - *most* node builtin modules.
+  - bundle splitting.
+  - file watching.
 - Configurable via `.bundlerrc.json`.
 
 
