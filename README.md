@@ -44,8 +44,7 @@ $ pakit src/file-1.js src/file-2.js --out dist/bundle.js --watch
 - Configurable via `.bundlerrc.json`.
 
 
-# 
-dependencies
+# dependencies
 
 You do not need to install any dependencies in your project for `pakit` to work. Meaning, you do not need to install/maintain `babel` or `eslint` unless you really want to. `pakit` accomplishes this by first trying to use dependencies from your project. Any dependencies that aren't found in your project `pakit` will subtitute with its own. This creates an *opt-in* system if you want to take more granular control of the situation by simply installing in your project the dependencies you want to manage.
 
