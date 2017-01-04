@@ -24,6 +24,7 @@
   "homepage": "https://github.com/MiguelCastillo/pakit#readme",
   "dependencies": {
     "babel-core": "^6.20.0",
+    "belty": "^4.0.3",
     "bit-bundler": "^5.3.2",
     "bit-bundler-extractsm": "^1.0.1",
     "bit-bundler-minifyjs": "^1.0.4",
