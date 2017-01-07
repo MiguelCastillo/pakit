@@ -6,15 +6,6 @@ var utils = require("belty");
 var cwd = process.cwd();
 
 var Bitbundler = requireModule("bit-bundler");
-var jsPlugin = requireModule("bit-loader-js");
-var eslintPlugin = requireModule("bit-eslint");
-var babelPlugin = requireModule("bit-loader-babel");
-var excludesPlugin = requireModule("bit-loader-excludes");
-var extensionsPuglin = requireModule("bit-loader-extensions");
-var nodeBuiltins = requireModule("bit-loader-builtins");
-var cssPlugin = requireModule("bit-loader-css");
-var jsonPlugin = requireModule("bit-loader-json");
-var httpResourcePlugin = requireModule("bit-loader-httpresource");
 var minify = requireModule("bit-bundler-minifyjs");
 var extractsm = requireModule("bit-bundler-extractsm");
 var splitter = requireModule("bit-bundler-splitter");
@@ -32,21 +23,34 @@ function createBundler(options) {
     umd: settings.umd,
     watch: settings.watch,
     loader: {
-      plugins: [
-        excludesPlugin(settings.excludes),
-        extensionsPuglin(settings.extensions),
-        httpResourcePlugin(settings.httpResources),
-        eslintPlugin(settings.eslint),
-        jsPlugin(settings.js),
-        babelPlugin(Object.assign({ core: babelCore, options: { presets: [], sourceMaps: "inline" } }, settings.babel)),
-        cssPlugin(settings.css),
-        jsonPlugin(settings.json),
-        nodeBuiltins()
-      ]
+      plugins: configureLoaderPlugins(settings)
     },
     bundler: {
-      plugins: configureBundlerPlugins(utils.pick(settings, ["minify", "shards", "extractsm"]))
+      plugins: configureBundlerPlugins(settings)
     }
+  });
+}
+
+function configureLoaderPlugins(configurations) {
+  if (configurations.babel) {
+    configurations.babel = Object.assign({ core: babelCore, options: { presets: [], sourceMaps: "inline" } }, configurations.babel);
+  }
+
+  return [
+    "excludes",
+    "extensions",
+    "httpresource",
+    "eslint",
+    "js",
+    "css",
+    "json",
+    "babel",
+    "builtins"
+  ].filter(function(plugin) {
+    return configurations[plugin];
+  })
+  .map(function(plugin) {
+    return requireModule("bit-loader-" + plugin)(configurations[plugin]);
   });
 }
 
