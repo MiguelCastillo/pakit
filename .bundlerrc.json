@@ -8,5 +8,6 @@
   "js": { "extensions": ["js"] },
   "css": { "extensions": ["css"] },
   "json": { "extensions": ["json"] },
-  "httpresources": {}
+  "httpresources": {},
+  "builtins": {}
 }
