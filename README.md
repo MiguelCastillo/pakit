@@ -1,7 +1,8 @@
 # pakit
+
 really opinionated and flexible JS bundler
 
-pakit provides a very specific set of tools and *default* configurations for a great out of the box experience. Just give pakit the file(s) you want paked up, and you get the minified output with sourcemaps.
+pakit provides a very specific set of tools and *default* configurations for a great out of the box experience. Just give pakit the file(s) you want paked up, and you get linting, bundling, and minification with sourcemaps without much setup.
 
 # usage
 
@@ -32,16 +33,18 @@ $ pakit src/file-1.js src/file-2.js --out dist/bundle.js --watch
 
 # stack and features
 
+An important feature is being as unobtrusive as possible. You configure eslint and babel through their corresponding rc files instead of configuring pakit's config file. This allows you to introduce pakit into your ecosystem without needing to migrate or rig configurations to work with pakit. If you decide that you don't like pakit, you get to keep your configurations.
+
 - [eslint](http://eslint.org/) to lint your code when it is being paked. Supports `.eslintrc.json` config files.
 - [babel](https://babeljs.io/) to transform your JavaScript files. Supports `.babelrc` config files.
 - [uglify](https://github.com/mishoo/UglifyJS2) to minify your paked files.
-- It will handle
+- pakit is configurable via `.bundlerrc.json`.
+- pakit will handle
   - dependencies defined with CJS require and ES2015 import statements.
   - JSON and CSS assets.
   - *most* node builtin modules.
   - bundle splitting.
   - file watching.
-- Configurable via `.bundlerrc.json`.
 
 
 # dependencies
