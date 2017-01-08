@@ -29,13 +29,16 @@ var defaultLoaderPlugins = [
 ];
 
 function createBundler(options) {
-  settings = Object.assign({}, config, options);
+  settings = Object.assign({ loaders: {} }, config, options);
 
   return new Bitbundler({
     umd: settings.umd,
     watch: settings.watch,
     loader: {
-      plugins: configureLoaderPlugins(settings, defaultLoaderPlugins).concat(configureLoaderPlugins(settings.loaders))
+      plugins: []
+        .concat(configureLoaderPlugins(settings, defaultLoaderPlugins))
+        .concat(configureLoaderPlugins(settings.loaders, Object.keys(settings.loaders)))
+        .concat(configureLoaderPlugins(settings, ["cache"]))
     },
     bundler: {
       plugins: configureBundlerPlugins(settings)
@@ -45,7 +48,6 @@ function createBundler(options) {
 
 function configureLoaderPlugins(configurations, plugins) {
   configurations = configurations || {};
-  plugins = plugins || Object.keys(configurations);
 
   if (configurations.babel) {
     configurations.babel = Object.assign({ core: babelCore, options: { presets: [], sourceMaps: "inline" } }, configurations.babel);

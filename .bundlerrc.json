@@ -11,6 +11,7 @@
   "babel": { "extensions": ["js"] },
   "httpresource": {},
   "builtins": {},
+  "cache": {},
 
   "shards": {}
 }
