@@ -16,6 +16,18 @@ var config = require(path.join(__dirname, "../", ".bundlerrc.json"));
 try { config = Object.assign({}, config, require(path.join(cwd, ".bundlerrc.json"))); }
 catch (e) { }
 
+var defaultLoaderPlugins = [
+  "excludes",
+  "extensions",
+  "httpresource",
+  "eslint",
+  "js",
+  "css",
+  "json",
+  "babel",
+  "builtins"
+];
+
 function createBundler(options) {
   settings = Object.assign({}, config, options);
 
@@ -23,7 +35,7 @@ function createBundler(options) {
     umd: settings.umd,
     watch: settings.watch,
     loader: {
-      plugins: configureLoaderPlugins(settings)
+      plugins: configureLoaderPlugins(settings, defaultLoaderPlugins).concat(configureLoaderPlugins(settings.loaders))
     },
     bundler: {
       plugins: configureBundlerPlugins(settings)
@@ -31,27 +43,21 @@ function createBundler(options) {
   });
 }
 
-function configureLoaderPlugins(configurations) {
+function configureLoaderPlugins(configurations, plugins) {
+  configurations = configurations || {};
+  plugins = plugins || Object.keys(configurations);
+
   if (configurations.babel) {
     configurations.babel = Object.assign({ core: babelCore, options: { presets: [], sourceMaps: "inline" } }, configurations.babel);
   }
 
-  return [
-    "excludes",
-    "extensions",
-    "httpresource",
-    "eslint",
-    "js",
-    "css",
-    "json",
-    "babel",
-    "builtins"
-  ].filter(function(plugin) {
-    return configurations[plugin];
-  })
-  .map(function(plugin) {
-    return requireModule("bit-loader-" + plugin)(configurations[plugin]);
-  });
+  return plugins
+    .filter(function(plugin) {
+      return configurations[plugin];
+    })
+    .map(function(plugin) {
+      return requireModule("bit-loader-" + plugin)(configurations[plugin]);
+    });
 }
 
 function configureBundlerPlugins(configurations) {
