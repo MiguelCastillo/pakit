@@ -3,11 +3,14 @@
   "extensions": ["js", "css", "json"],
 
   "eslint": { "extensions": ["js"] },
-  "babel": { "extensions": ["js"] },
 
   "js": { "extensions": ["js"] },
   "css": { "extensions": ["css"] },
   "json": { "extensions": ["json"] },
-  "httpresources": {},
-  "builtins": {}
+
+  "babel": { "extensions": ["js"] },
+  "httpresource": {},
+  "builtins": {},
+
+  "shards": {}
 }
