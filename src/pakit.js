@@ -25,7 +25,8 @@ var defaultLoaderPlugins = [
   "css",
   "json",
   "babel",
-  "builtins"
+  "builtins",
+  "remove"
 ];
 
 function createBundler(options) {

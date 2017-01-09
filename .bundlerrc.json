@@ -1,4 +1,5 @@
 {
+  "remove": [],
   "excludes": [],
   "extensions": ["js", "css", "json"],
 
