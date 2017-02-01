@@ -45,6 +45,7 @@ An important feature is being as unobtrusive as possible. You configure eslint a
   - *most* node builtin modules.
   - bundle splitting.
   - file watching.
+  - caching to maximize startup times.
 
 
 # dependencies
