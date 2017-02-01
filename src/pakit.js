@@ -29,17 +29,26 @@ var defaultLoaderPlugins = [
   "remove"
 ];
 
+var defaultLoaderOptions = {
+  "babel": {
+    core: babelCore,
+    options: {
+      presets: [], sourceMaps: "inline"
+    }
+  }
+};
+
 function createBundler(options) {
-  settings = Object.assign({ loaders: {} }, config, options);
+  settings = Object.assign({}, config, options);
 
   return new Bitbundler({
     umd: settings.umd,
     watch: settings.watch,
     loader: {
       plugins: []
-        .concat(configureLoaderPlugins(settings, defaultLoaderPlugins))
-        .concat(configureLoaderPlugins(settings.loaders, Object.keys(settings.loaders)))
-        .concat(configureLoaderPlugins(settings, ["cache"]))
+        .concat(configureLoaderPlugins(utils.pick(settings, defaultLoaderPlugins)))
+        .concat(configureLoaderPlugins(settings.loaders || {}))
+        .concat(configureLoaderPlugins(utils.pick(settings, ["cache"])))
     },
     bundler: {
       plugins: configureBundlerPlugins(settings)
@@ -47,19 +56,18 @@ function createBundler(options) {
   });
 }
 
-function configureLoaderPlugins(configurations, plugins) {
-  configurations = configurations || {};
-
-  if (configurations.babel) {
-    configurations.babel = Object.assign({ core: babelCore, options: { presets: [], sourceMaps: "inline" } }, configurations.babel);
-  }
-
-  return plugins
+function configureLoaderPlugins(configurations) {
+  return Object
+    .keys(configurations)
     .filter(function(plugin) {
       return configurations[plugin];
     })
     .map(function(plugin) {
-      return requireModule("bit-loader-" + plugin)(configurations[plugin]);
+      var settings = configurations[plugin].constructor === Object.constructor ?
+        Object.assign({}, defaultLoaderOptions[plugin], configurations[plugin]) :
+        configurations[plugin];
+
+      return requireModule("bit-loader-" + plugin)(settings);
     });
 }
 
