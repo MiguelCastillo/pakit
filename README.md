@@ -1,5 +1,7 @@
 # pakit
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/MiguelCastillo/pakit.svg)](https://greenkeeper.io/)
+
 really opinionated and flexible JS bundler
 
 pakit provides a very specific set of tools and *default* configurations for a great out of the box experience. Just give pakit the file(s) you want paked up, and you get linting, bundling, and minification with sourcemaps without much setup.
