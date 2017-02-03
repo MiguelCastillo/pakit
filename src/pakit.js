@@ -38,7 +38,10 @@ var defaultLoaderOptions = {
     }
   },
   "eslint": {
-    eslint: eslint
+    eslint: eslint,
+    options: {
+      cwd: cwd
+    }
   }
 };
 
