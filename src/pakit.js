@@ -9,7 +9,8 @@ var Bitbundler = requireModule("bit-bundler");
 var minify = requireModule("bit-bundler-minifyjs");
 var extractsm = requireModule("bit-bundler-extractsm");
 var splitter = requireModule("bit-bundler-splitter");
-var babelCore = requireModule("babel-core");
+var babel = requireModule("babel-core");
+var eslint = requireModule("eslint");
 
 // Config file
 var config = require(path.join(__dirname, "../", ".bundlerrc.json"));
@@ -31,10 +32,13 @@ var defaultLoaderPlugins = [
 
 var defaultLoaderOptions = {
   "babel": {
-    core: babelCore,
+    core: babel,
     options: {
       presets: [], sourceMaps: "inline"
     }
+  },
+  "eslint": {
+    eslint: eslint
   }
 };
 
@@ -63,7 +67,7 @@ function configureLoaderPlugins(configurations) {
       return configurations[plugin];
     })
     .map(function(plugin) {
-      var settings = configurations[plugin].constructor === Object.constructor ?
+      var settings = configurations[plugin].constructor === Object ?
         Object.assign({}, defaultLoaderOptions[plugin], configurations[plugin]) :
         configurations[plugin];
 
