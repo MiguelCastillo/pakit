@@ -9,8 +9,15 @@ var Bitbundler = requireModule("bit-bundler");
 var minify = requireModule("bit-bundler-minifyjs");
 var extractsm = requireModule("bit-bundler-extractsm");
 var splitter = requireModule("bit-bundler-splitter");
-var babel = requireModule("babel-core");
-var eslint = requireModule("eslint");
+
+var babel;
+var eslint;
+
+try { babel = requireModule("babel-core"); }
+catch (e) { }
+
+try { eslint = requireModule("eslint"); }
+catch (e) { }
 
 // Config file
 var config = require(path.join(__dirname, "../", ".bundlerrc.json"));
