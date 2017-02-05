@@ -13,10 +13,10 @@ var splitter = requireModule("bit-bundler-splitter");
 var babel;
 var eslint;
 
-try { babel = requireModule("babel-core"); }
+try { babel = require("babel-core"); }
 catch (e) { }
 
-try { eslint = requireModule("eslint"); }
+try { eslint = require("eslint"); }
 catch (e) { }
 
 // Config file
