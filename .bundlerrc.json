@@ -2,6 +2,7 @@
   "remove": [],
   "excludes": [],
   "extensions": ["js", "css", "json"],
+  "shimmer": {},
 
   "eslint": { "extensions": ["js"] },
 
