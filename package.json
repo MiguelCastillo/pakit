@@ -39,6 +39,7 @@
     "bit-loader-js": "^1.2.2",
     "bit-loader-json": "^1.1.4",
     "bit-loader-remove": "^1.0.1",
+    "bit-loader-shimmer": "^1.0.2",
     "fs-extra": "^2.0.0",
     "handlebars": "^4.0.6",
     "resolve": "^1.2.0",

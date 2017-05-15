@@ -28,6 +28,7 @@ var defaultLoaderPlugins = [
   "excludes",
   "extensions",
   "httpresource",
+  "shimmer",
   "eslint",
   "js",
   "css",
