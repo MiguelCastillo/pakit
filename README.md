@@ -44,6 +44,7 @@ An important feature is being as unobtrusive as possible. You configure eslint a
 - pakit will handle
   - dependencies defined with CJS require and ES2015 import statements.
   - JSON and CSS assets.
+  - Module shimming.
   - *most* node builtin modules.
   - bundle splitting.
   - file watching.
