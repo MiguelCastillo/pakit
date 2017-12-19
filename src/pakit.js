@@ -61,9 +61,10 @@ var defaultLoaderOptions = {
 };
 
 function createBundler(options) {
-  settings = Object.assign({}, config, options);
+  var settings = Object.assign({}, config, options);
 
   return new Bitbundler({
+    log: settings.log,
     umd: settings.umd,
     watch: settings.watch,
     loader: {
