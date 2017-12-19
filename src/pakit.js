@@ -1,7 +1,6 @@
 var fs = require("fs-extra");
 var path = require("path");
 var resolve = require("resolve");
-var handlebars = require("handlebars");
 var utils = require("belty");
 var cwd = process.cwd();
 
@@ -140,12 +139,13 @@ function configureSplitterOptions(name, options) {
 
 function buildBannerString() {
   var date = new Date();
+  var fullYear = date.getFullYear();
   var pkg = {};
+
   try { pkg = require(path.join(process.cwd(), "package")); }
   catch (e) { }
 
-  var template = handlebars.compile("/*! {{ pkg.name }} v{{ pkg.version }} - {{ date }}. (c) {{ fullYear }} {{{ pkg.author }}}. Licensed under {{ pkg.license }} */");
-  return template({ pkg: pkg, date: date, fullYear: date.getFullYear() });
+  return `/*! ${pkg.name} v${pkg.version} - ${date}. (c) ${fullYear} ${pkg.author}. Licensed under ${pkg.license} */`;
 }
 
 function resolveModule(name) {
