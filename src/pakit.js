@@ -29,11 +29,6 @@ if (fs.existsSync(localPakitConfigPath+".json") || fs.existsSync(localPakitConfi
   Object.assign(config, require(localPakitConfigPath));
 }
 
-/// This is for legacy but it is deprecated. Use .pakit
-if (fs.existsSync(localBundlerrcPath+".json") || fs.existsSync(localBundlerrcPath+".js")) {
-  Object.assign(config, require(localBundlerrcPath));
-}
-
 var defaultLoaderPlugins = [
   "excludes",
   "extensions",
