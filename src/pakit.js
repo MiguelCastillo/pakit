@@ -90,7 +90,10 @@ function configureBundlerPlugins(configurations) {
   var plugins = configureShards(configurations.shards);
 
   if (configurations.minify !== false) {
-    plugins.push(minify(Object.assign({ banner: buildBannerString() }, configurations.minify)));
+    plugins.push(minify(Object.assign({ output: {
+      beautify: false,
+      preamble: buildBannerString()
+    }}, configurations.minify)));
   }
 
   if (configurations.extractsm !== false) {
