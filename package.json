@@ -1,6 +1,6 @@
 {
   "name": "pakit",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "really opinionated and flexible JS bundler",
   "main": "src/pakit.js",
   "bin": {
