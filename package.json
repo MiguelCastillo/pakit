@@ -1,13 +1,12 @@
 {
   "name": "pakit",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "really opinionated and flexible JS bundler",
   "main": "src/pakit.js",
   "bin": {
     "pakit": "./bin/cli.js"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/MiguelCastillo/pakit.git"
