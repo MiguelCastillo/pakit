@@ -40,7 +40,7 @@ An important feature is being as unobtrusive as possible. You configure eslint a
 - [eslint](http://eslint.org/) to lint your code when it is being paked. Supports `.eslintrc.json` config files.
 - [babel](https://babeljs.io/) to transform your JavaScript files. Supports `.babelrc` config files.
 - [uglify](https://github.com/mishoo/UglifyJS2) to minify your paked files.
-- pakit is configurable via `.bundlerrc.json`.
+- pakit is configurable via `.pakit.json` or `.pakit.js`.
 - pakit will handle
   - dependencies defined with CJS require and ES2015 import statements.
   - JSON and CSS assets.
@@ -56,9 +56,9 @@ An important feature is being as unobtrusive as possible. You configure eslint a
 You do not need to install any dependencies in your project for `pakit` to work. Meaning, you do not need to install/maintain `babel` or `eslint` unless you really want to. `pakit` accomplishes this by first trying to use dependencies from your project. Any dependencies that aren't found in your project `pakit` will subtitute with its own. This creates an *opt-in* system if you want to take more granular control of the situation by simply installing in your project the dependencies you want to manage.
 
 
-# .bundlerrc.json
+# .pakit.json or .pakit.js
 
-The default setup is defined in this [.bundlerrc.json](https://github.com/MiguelCastillo/pakit/blob/master/.bundlerrc.json). You are free to create your own in your project to customize your experience. You probably won't have to change much with the exception of perhaps specifying `shards` options, which is how bundle splitting is activated.
+The default setup is defined in this [.pakit.json](https://github.com/MiguelCastillo/pakit/blob/master/.pakit.json). But it can also be `.js` file that exports your settings. You are free to create your own in your project to customize your experience. You probably won't have to change much with the exception of perhaps specifying `shards` options, which is how bundle splitting is activated.
 
 > configurations are mixed in with default settings so that you can override whatever defaults you need.
 
