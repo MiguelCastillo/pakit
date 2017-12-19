@@ -1,6 +1,6 @@
 # pakit
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/MiguelCastillo/pakit.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/MiguelCastillo/pakit.svg?branch=master)](https://travis-ci.org/MiguelCastillo/pakit) [![Greenkeeper badge](https://badges.greenkeeper.io/MiguelCastillo/pakit.svg)](https://greenkeeper.io/)
 
 really opinionated and flexible JS bundler
 
