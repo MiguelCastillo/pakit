@@ -4,6 +4,8 @@ var resolve = require("resolve");
 var handlebars = require("handlebars");
 var utils = require("belty");
 var cwd = process.cwd();
+var localPakitConfigPath = path.join(cwd, ".pakit");
+var localBundlerrcPath = path.join(cwd, ".bundlerrc");
 
 var Bitbundler = requireModule("bit-bundler");
 var minify = requireModule("bit-bundler-minifyjs");
@@ -19,10 +21,18 @@ catch (e) { }
 try { eslint = require("eslint"); }
 catch (e) { }
 
-// Config file
-var config = require(path.join(__dirname, "../", ".bundlerrc.json"));
-try { config = Object.assign({}, config, require(path.join(cwd, ".bundlerrc.json"))); }
-catch (e) { }
+/// Config file
+var config = require(path.join(__dirname, "../", ".pakit"));
+
+/// Assign only if it exists.
+if (fs.existsSync(localPakitConfigPath+".json") || fs.existsSync(localPakitConfigPath+".js")) {
+  Object.assign(config, require(localPakitConfigPath));
+}
+
+/// This is for legacy but it is deprecated. Use .pakit
+if (fs.existsSync(localBundlerrcPath+".json") || fs.existsSync(localBundlerrcPath+".js")) {
+  Object.assign(config, require(localBundlerrcPath));
+}
 
 var defaultLoaderPlugins = [
   "excludes",
