@@ -56,9 +56,15 @@ An important feature is being as unobtrusive as possible. You configure eslint a
 You do not need to install any dependencies in your project for `pakit` to work. Meaning, you do not need to install/maintain `babel` or `eslint` unless you really want to. `pakit` accomplishes this by first trying to use dependencies from your project. Any dependencies that aren't found in your project `pakit` will subtitute with its own. This creates an *opt-in* system if you want to take more granular control of the situation by simply installing in your project the dependencies you want to manage.
 
 
-# .pakit.json or .pakit.js
+# config file or directory
 
-The default setup is defined in this [.pakit.json](https://github.com/MiguelCastillo/pakit/blob/master/.pakit.json). But it can also be `.js` file that exports your settings. You are free to create your own in your project to customize your experience. You probably won't have to change much with the exception of perhaps specifying `shards` options, which is how bundle splitting is activated.
+The default setup is defined in this [.pakit.json](https://github.com/MiguelCastillo/pakit/blob/master/.pakit.json). Beyond that, you can define pakit settings in your projects in three different forms.
+
+1. `.pakit.json` [file], which is a json formatted file with the settings for pakit.
+2. `.pakit.js` [file], which is a module that exports the settings for pakit. This mehtod allows you to add logic in your configuration for pakit.
+3. `.pakit` [directory], which is a directory with an `index.js` module that exports the settings for pakit. This method keeps you to build configuration files collocated in one directory to prevent them from polluting your project.
+
+While pakit provides very sensible default settings, you are welcome to expand on the defaults to meet your needs.
 
 > configurations are mixed in with default settings so that you can override whatever defaults you need.
 

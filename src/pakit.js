@@ -4,8 +4,6 @@ var resolve = require("resolve");
 var handlebars = require("handlebars");
 var utils = require("belty");
 var cwd = process.cwd();
-var localPakitConfigPath = path.join(cwd, ".pakit");
-var localBundlerrcPath = path.join(cwd, ".bundlerrc");
 
 var Bitbundler = requireModule("bit-bundler");
 var minify = requireModule("bit-bundler-minifyjs");
@@ -21,12 +19,17 @@ catch (e) { }
 try { eslint = require("eslint"); }
 catch (e) { }
 
-/// Config file
 var config = require(path.join(__dirname, "../", ".pakit"));
 
-/// Assign only if it exists.
-if (fs.existsSync(localPakitConfigPath+".json") || fs.existsSync(localPakitConfigPath+".js")) {
-  Object.assign(config, require(localPakitConfigPath));
+try {
+  Object.assign(config, require(path.join(cwd, ".pakit")));
+}
+catch(ex) {
+  // If configuration isn't found, no problem. Continue on. Only rethrow if
+  // there are actual problems processing the configuration file.
+  if (ex.code !== "MODULE_NOT_FOUND") {
+    throw ex;
+  }
 }
 
 var defaultLoaderPlugins = [
@@ -145,7 +148,7 @@ function buildBannerString() {
   return template({ pkg: pkg, date: date, fullYear: date.getFullYear() });
 }
 
-function requireModule(name) {
+function resolveModule(name) {
   var modulePath;
 
   try {
@@ -155,7 +158,11 @@ function requireModule(name) {
     modulePath = resolve.sync(name, { basedir: __dirname });
   }
 
-  return require(modulePath);
+  return modulePath;
+}
+
+function requireModule(name) {
+  return require(resolveModule(name));
 }
 
 module.exports = function (files, options) {
