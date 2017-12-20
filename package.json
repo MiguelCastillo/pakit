@@ -7,7 +7,7 @@
     "pakit": "./bin/cli.js"
   },
   "scripts": {
-    "test": "mocha --require babel-register"
+    "test": "eslint src/**/*.js test/**/*.js && mocha --require babel-register"
   },
   "repository": {
     "type": "git",
@@ -48,6 +48,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-register": "^6.26.0",
     "chai": "^4.1.2",
+    "eslint": "^4.13.1",
     "mocha": "^4.0.1"
   }
 }

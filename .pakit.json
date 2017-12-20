@@ -1,5 +1,5 @@
 {
-  "multiprocess": 2,
+  "multiprocess": 0,
   "remove": [],
   "excludes": [],
   "extensions": ["js", "css", "json"],
