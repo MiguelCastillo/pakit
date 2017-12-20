@@ -6,7 +6,7 @@ function buildPakitOptions() {
   var config = require(path.join(__dirname, "../../", ".pakit"));
 
   if (glob.sync(path.join(process.cwd(), ".bundlerrc*(.js|.json)")).length) {
-    process.stderr.write(`${chalk.cyan.bold("pakit:")} ${chalk.yellow.bold(".bundlerrc is deprecated")}. Please rename to ${chalk.bold(".pakit")} instead. We will continue to load .bundlerrc files for now.\n`);
+    process.stderr.write(`${chalk.cyan.bold("pakit:")} ${chalk.yellow.bold(".bundlerrc is deprecated")}. Please rename to ${chalk.bold(".pakit")} instead. We will continue to load .bundlerrc files for now. Please see visit https://github.com/MiguelCastillo/pakit#config-file-or-directory for more information.\n`);
     Object.assign(config, require(path.join(process.cwd(), ".bundlerrc")));
   }
   else {
