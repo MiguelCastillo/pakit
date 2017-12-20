@@ -19,7 +19,7 @@
     "semi": 1,
     "global-strict": 0,
     "wrap-iife": [2, "inside"],
-    "quotes": [1, "double"],
+    "quotes": [1, "double", { "allowTemplateLiterals": true }],
     "key-spacing": 0,
     "no-trailing-spaces": 0,
     "eol-last": 2

@@ -1,37 +1,11 @@
-var fs = require("fs-extra");
-var path = require("path");
-var resolve = require("resolve");
-var utils = require("belty");
-var cwd = process.cwd();
+const utils = require("belty");
+const Bitbundler = require("bit-bundler");
+const resolveModule = require("./resolveModule");
+const pakitDefaultOptionsBuilder = require("./options/pakit");
+const loaderDefaultOptionsBuilder = require("./options/loader");
+const stringBannerBuilder = require("./stringBannerBuilder");
 
-var Bitbundler = requireModule("bit-bundler");
-var minify = requireModule("bit-bundler-minifyjs");
-var extractsm = requireModule("bit-bundler-extractsm");
-var splitter = requireModule("bit-bundler-splitter");
-
-var babel;
-var eslint;
-
-try { babel = require("babel-core"); }
-catch (e) { }
-
-try { eslint = require("eslint"); }
-catch (e) { }
-
-var config = require(path.join(__dirname, "../", ".pakit"));
-
-try {
-  Object.assign(config, require(path.join(cwd, ".pakit")));
-}
-catch(ex) {
-  // If configuration isn't found, no problem. Continue on. Only rethrow if
-  // there are actual problems processing the configuration file.
-  if (ex.code !== "MODULE_NOT_FOUND") {
-    throw ex;
-  }
-}
-
-var defaultLoaderPlugins = [
+const defaultLoaderPlugins = [
   "excludes",
   "extensions",
   "httpresource",
@@ -45,23 +19,8 @@ var defaultLoaderPlugins = [
   "remove"
 ];
 
-var defaultLoaderOptions = {
-  "babel": {
-    core: babel,
-    options: {
-      presets: [], sourceMaps: "inline"
-    }
-  },
-  "eslint": {
-    eslint: eslint,
-    options: {
-      cwd: cwd
-    }
-  }
-};
-
 function createBundler(options) {
-  var settings = Object.assign({}, config, options);
+  var settings = Object.assign({}, pakitDefaultOptionsBuilder(), options);
 
   return new Bitbundler({
     log: settings.log,
@@ -80,6 +39,8 @@ function createBundler(options) {
 }
 
 function configureLoaderPlugins(configurations) {
+  const defaultLoaderOptions = loaderDefaultOptionsBuilder();
+
   return Object
     .keys(configurations)
     .filter(function(plugin) {
@@ -90,22 +51,26 @@ function configureLoaderPlugins(configurations) {
         Object.assign({}, defaultLoaderOptions[plugin], configurations[plugin]) :
         configurations[plugin];
 
-      return requireModule("bit-loader-" + plugin)(settings);
+      return [resolveModule("bit-loader-" + plugin),(settings)];
     });
 }
 
 function configureBundlerPlugins(configurations) {
-  var plugins = configureShards(configurations.shards);
+  var plugins = []
+  
+  if (Object.keys(configurations.shards).length) {
+    puglins.push([resolveModule("bit-bundler-splitter"), configureShards(configurations.shards)]);
+  }
 
   if (configurations.minify !== false) {
-    plugins.push(minify(Object.assign({ output: {
+    plugins.push([resolveModule("bit-bundler-minifyjs"), Object.assign({ output: {
       beautify: false,
-      preamble: buildBannerString()
-    }}, configurations.minify)));
+      preamble: stringBannerBuilder()
+    }}, configurations.minify)]);
   }
 
   if (configurations.extractsm !== false) {
-    plugins.push(extractsm(configurations.extractsm));
+    plugins.push([resolveModule("bit-bundler-extractsm"), configurations.extractsm]);
   }
 
   return plugins;
@@ -120,7 +85,7 @@ function configureShards(options) {
       options[name] = { match: { path: options[name] } };
     }
 
-    return splitter(name, configureSplitterOptions(name, options[name]));
+    return Object.assign({ name: name }, configureSplitterOptions(name, options[name]));
   });
 }
 
@@ -136,34 +101,6 @@ function configureSplitterOptions(name, options) {
     result[option] = configureSplitterOptions(option, options[option]);
     return result;
   }, {});
-}
-
-function buildBannerString() {
-  var date = new Date();
-  var fullYear = date.getFullYear();
-  var pkg = {};
-
-  try { pkg = require(path.join(process.cwd(), "package")); }
-  catch (e) { }
-
-  return `/*! ${pkg.name} v${pkg.version} - ${date}. (c) ${fullYear} ${pkg.author}. Licensed under ${pkg.license} */`;
-}
-
-function resolveModule(name) {
-  var modulePath;
-
-  try {
-    modulePath = resolve.sync(name, { basedir: cwd });
-  }
-  catch (ex) {
-    modulePath = resolve.sync(name, { basedir: __dirname });
-  }
-
-  return modulePath;
-}
-
-function requireModule(name) {
-  return require(resolveModule(name));
 }
 
 module.exports = function (files, options) {
