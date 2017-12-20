@@ -68,6 +68,8 @@ While pakit provides very sensible default settings, you are welcome to expand o
 
 > configurations are mixed in with default settings so that you can override whatever defaults you need.
 
+> .bitbundlerrc configuration files are deprecated. Please use one of the forms of .pakit. Only the file name has changed, so you can just rename the file.
+
 ## shards
 
 This is bundle splitting in which every chunk that is split out is called a shard.
