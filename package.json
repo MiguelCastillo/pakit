@@ -41,6 +41,7 @@
     "bit-loader-remove": "^1.0.2",
     "bit-loader-shimmer": "^1.0.2",
     "fs-extra": "^5.0.0",
+    "glob": "^7.1.2",
     "resolve": "^1.5.0",
     "subarg": "^1.0.0"
   },

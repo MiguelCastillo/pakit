@@ -1,5 +1,5 @@
 const path = require("path");
-const resolveModule = require("../resolveModule");
+const glob = require("glob");
 
 function buildEslintOptions() {
   var eslintConfig = {
@@ -30,7 +30,7 @@ function buildEslintOptions() {
   };
 
   try {
-    if (resolveModule(path.join(process.cwd(), ".eslintrc"))) {
+    if (glob.sync(path.join(process.cwd(), ".eslintrc*(.js|.json|.yml)")).length) {
       eslintConfig = {};
     }
   }
