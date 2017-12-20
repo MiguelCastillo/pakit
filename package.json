@@ -40,6 +40,7 @@
     "bit-loader-json": "^1.1.4",
     "bit-loader-remove": "^1.0.2",
     "bit-loader-shimmer": "^1.0.2",
+    "chalk": "^2.3.0",
     "fs-extra": "^5.0.0",
     "glob": "^7.1.2",
     "resolve": "^1.5.0",
