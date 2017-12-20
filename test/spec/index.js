@@ -2,6 +2,8 @@ import { expect } from "chai";
 import pakit from "../../src/pakit";
 
 describe("pakit test suite", function() {
+  this.timeout(10000);
+
   describe("when bundling a module with no dependencies", function() {
     var result;
     before(function () {
