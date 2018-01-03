@@ -1,12 +1,10 @@
 #!/usr/bin/env node
 
-var bundler = require("../src/pakit");
-var path = require("path");
-var subarg = require("subarg");
-var argv = subarg(process.argv.slice(2));
-
-var src = argv._.concat(argv.files || []);
-var dest = argv.out || path.join(process.cwd(), "dist/out.js");
+const bundler = require("../src/pakit");
+const path = require("path");
+const subarg = require("subarg");
+const utils = require("belty");
+const argv = subarg(process.argv.slice(2));
 
 Object.keys(argv).forEach(function(key) {
   argv[key] = (
@@ -16,4 +14,11 @@ Object.keys(argv).forEach(function(key) {
   );
 });
 
-bundler({ src: src, dest: dest }, argv);
+bundler({
+  contents: argv.contents,
+  path: argv.path,
+  src: [].concat(argv._).concat(argv.src).concat(argv.files).filter(Boolean),
+  dest: argv.dest || argv.out || path.join(process.cwd(), "dist/out.js")
+}, 
+  utils.omit(argv, ["contents", "path", "src", "files", "dest"])
+);

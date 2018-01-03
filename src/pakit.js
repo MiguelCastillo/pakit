@@ -23,6 +23,7 @@ function createBundler(options) {
   var settings = Object.assign({}, pakitDefaultOptionsBuilder(), options);
 
   return new Bitbundler({
+    baseUrl: settings.baseUrl,
     log: settings.log,
     umd: settings.umd,
     watch: settings.watch,
