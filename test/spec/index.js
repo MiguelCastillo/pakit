@@ -44,11 +44,11 @@ describe("pakit test suite", function() {
   });
 
   describe("when bundling a file content with no dependencies", function() {
-    var result, contents;
+    var result, content;
 
     before(function () {
-      contents = "console.log('hello world - content');";
-      return pakit({ contents: contents }, { log: false }).then(ctx => result = ctx);
+      content = "console.log('hello world - content');";
+      return pakit({ content: content }, { log: false }).then(ctx => result = ctx);
     });
 
     it("then result has a 'main' shard", function() {
@@ -65,11 +65,11 @@ describe("pakit test suite", function() {
   });
 
   describe("when bundling a file content with two dependencies", function() {
-    var result, contents, filePath = path.join(process.cwd(), "test/sample/hello-world/index.js");
+    var result, content, filePath = path.join(process.cwd(), "test/sample/hello-world/index.js");
 
     before(function () {
-      contents = `require("./hello");console.log(" == ");require("./world");`;
-      return pakit({ contents: contents, path: filePath }, { log: false }).then(ctx => result = ctx);
+      content = `require("./hello");console.log(" == ");require("./world");`;
+      return pakit({ content: content, path: filePath }, { log: false }).then(ctx => result = ctx);
     });
 
     it("then result has a 'main' shard", function() {
