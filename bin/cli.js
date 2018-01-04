@@ -15,10 +15,10 @@ Object.keys(argv).forEach(function(key) {
 });
 
 bundler({
-  contents: argv.contents,
+  content: argv.content,
   path: argv.path,
   src: [].concat(argv._).concat(argv.src).concat(argv.files).filter(Boolean),
   dest: argv.dest || argv.out || path.join(process.cwd(), "dist/out.js")
 }, 
-  utils.omit(argv, ["contents", "path", "src", "files", "dest"])
+  utils.omit(argv, ["content", "path", "src", "files", "dest"])
 );
