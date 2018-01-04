@@ -24,7 +24,7 @@
   "homepage": "https://github.com/MiguelCastillo/pakit#readme",
   "dependencies": {
     "belty": "^5.1.0",
-    "bit-bundler": "^9.0.0",
+    "bit-bundler": "^10.0.0",
     "bit-bundler-extractsm": "^2.1.1",
     "bit-bundler-minifyjs": "^3.0.3",
     "bit-bundler-splitter": "^5.0.0",
