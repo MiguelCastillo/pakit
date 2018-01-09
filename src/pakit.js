@@ -60,7 +60,7 @@ function configureBundlerPlugins(configurations) {
   var plugins = []
   
   if (Object.keys(configurations.shards).length) {
-    puglins.push([resolveModule("bit-bundler-splitter"), configureShards(configurations.shards)]);
+    plugins.push([resolveModule("bit-bundler-splitter"), configureShards(configurations.shards)]);
   }
 
   if (configurations.minify !== false) {
