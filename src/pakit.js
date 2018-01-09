@@ -79,29 +79,8 @@ function configureBundlerPlugins(configurations) {
 
 function configureShards(options) {
   return Object.keys(options || {}).map(function (name) {
-    // Sample config
-    // splitter("dist/vendor.js", { match: { path: /\/node_modules\// } })
-    // The input config can a string and it will be coerced to a match.path matcher
-    if (typeof options[name] === "string" || options[name] instanceof Array) {
-      options[name] = { match: { path: options[name] } };
-    }
-
-    return Object.assign({ name: name }, configureSplitterOptions(name, options[name]));
+    return Object.assign({ name: name }, options[name]);
   });
-}
-
-function configureSplitterOptions(name, options) {
-  // this is specifically to convert all string matching rules to be regexps
-  if (typeof options === "string" || options instanceof Array) {
-    return name === "extensions" ?
-      options :
-      [].concat(options).map(function (opt) { return new RegExp(opt); });
-  }
-
-  return Object.keys(options).reduce(function (result, option) {
-    result[option] = configureSplitterOptions(option, options[option]);
-    return result;
-  }, {});
 }
 
 module.exports = function (files, options) {
