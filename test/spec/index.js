@@ -16,7 +16,9 @@ describe("pakit test suite", function() {
     });
 
     it("then content of the 'main' shard with correct  value", function() {
-      expect(trimResult(result.shards["main"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function r(e,n,o){function t(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var l=new Error("Cannot find module '"+i+"'");throw l.code="MODULE_NOT_FOUND",l}var a=n[i]={exports:{}};e[i][0].call(a.exports,function(r){var n=e[i][1][r];return t(n||r)},a,a.exports,r,e,n,o)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<o.length;i++)t(o[i]);return t}({1:[function(r,e,n){"use strict";console.log("hello world")},{}]},{},[1]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = `Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(r,e){var t={};function n(e){if(!t.hasOwnProperty(e)){var i={exports:{}},f=r[e][0],u=r[e][1];t[e]=i.exports,f((a=u,function(r){var e=a[r];if(o(e))return n(e);for(var t=n.next;t;t=t.next)if(t.has(e))return t.get(e);for(var i=n.prev;i;i=i.prev)if(i.has(e))return i.get(e);throw new Error("Module \'"+r+"\' with id "+e+" was not found")}),i,i.exports),t[e]=i.exports}var a;return t[e]}function o(e){return r[e]}if(n.get=n,n.has=o,n.next="undefined"==typeof _bb$iter?null:_bb$iter,e.length)for(var i=n,f=n.next;f;)f.prev=i,i=f,f=f.next;return e.forEach(n),n}({1:[function(r,e,t){"use strict";console.log("hello world")},{}]},[1]);`;
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the result has one module", function() {
@@ -42,7 +44,9 @@ describe("pakit test suite", function() {
     });
 
     it("then the 'main' bundle has the expected content", function() {
-      expect(trimResult(result.shards["main"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function r(e,o,n){function t(i,f){if(!o[i]){if(!e[i]){var l="function"==typeof require&&require;if(!f&&l)return l(i,!0);if(u)return u(i,!0);var c=new Error("Cannot find module \'"+i+"\'");throw c.code="MODULE_NOT_FOUND",c}var a=o[i]={exports:{}};e[i][0].call(a.exports,function(r){var o=e[i][1][r];return t(o||r)},a,a.exports,r,e,o,n)}return o[i].exports}for(var u="function"==typeof require&&require,i=0;i<n.length;i++)t(n[i]);return t}({1:[function(r,e,o){"use strict";r("./hello"),console.log(" == "),r("./world")},{"./hello":2,"./world":3}]},{},[1]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = `Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(r,e){var t={};function n(e){if(!t.hasOwnProperty(e)){var i={exports:{}},f=r[e][0],u=r[e][1];t[e]=i.exports,f((a=u,function(r){var e=a[r];if(o(e))return n(e);for(var t=n.next;t;t=t.next)if(t.has(e))return t.get(e);for(var i=n.prev;i;i=i.prev)if(i.has(e))return i.get(e);throw new Error("Module \'"+r+"\' with id "+e+" was not found")}),i,i.exports),t[e]=i.exports}var a;return t[e]}function o(e){return r[e]}if(n.get=n,n.has=o,n.next="undefined"==typeof _bb$iter?null:_bb$iter,e.length)for(var i=n,f=n.next;f;)f.prev=i,i=f,f=f.next;return e.forEach(n),n}({1:[function(r,e,t){"use strict";r("./hello"),console.log(" == "),r("./world")},{"./hello":2,"./world":3}]},[1]);`;
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the 'main' bundle has one module", function() {
@@ -54,7 +58,9 @@ describe("pakit test suite", function() {
     });
 
     it("then the 'hello' bundle has the expected content", function() {
-      expect(trimResult(result.shards["hello"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function e(t,o,n){function r(s,i){if(!o[s]){if(!t[s]){var u="function"==typeof require&&require;if(!i&&u)return u(s,!0);if(l)return l(s,!0);var c=new Error("Cannot find module \'"+s+"\'");throw c.code="MODULE_NOT_FOUND",c}var f=o[s]={exports:{}};t[s][0].call(f.exports,function(e){var o=t[s][1][e];return r(o||e)},f,f.exports,e,t,o,n)}return o[s].exports}for(var l="function"==typeof require&&require,s=0;s<n.length;s++)r(n[s]);return r}({2:[function(e,t,o){"use strict";e("./hello.css"),e("./hello.json"),console.log("hello")},{"./hello.css":4,"./hello.json":5}],4:[function(e,t,o){e("$bit-loader-css/loadstyle")(".hello {\\n  color: blue;\\n}\\n")},{"$bit-loader-css/loadstyle":6}],5:[function(e,t,o){t.exports={hello:"json"}},{}],6:[function(e,t,o){t.exports=function(e){var t=document.getElementsByTagName("head")[0],o=document.createElement("style");o.setAttribute("type","text/css"),o.innerHTML=e,t.appendChild(o)}},{}]},{},[2]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = `Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(r,e){var t={};function n(e){if(!t.hasOwnProperty(e)){var i={exports:{}},f=r[e][0],u=r[e][1];t[e]=i.exports,f((a=u,function(r){var e=a[r];if(o(e))return n(e);for(var t=n.next;t;t=t.next)if(t.has(e))return t.get(e);for(var i=n.prev;i;i=i.prev)if(i.has(e))return i.get(e);throw new Error("Module '"+r+"' with id "+e+" was not found")}),i,i.exports),t[e]=i.exports}var a;return t[e]}function o(e){return r[e]}if(n.get=n,n.has=o,n.next="undefined"==typeof _bb$iter?null:_bb$iter,e.length)for(var i=n,f=n.next;f;)f.prev=i,i=f,f=f.next;return e.forEach(n),n}({1:[function(r,e,t){"use strict";r("./hello"),console.log(" == "),r("./world")},{"./hello":2,"./world":3}]},[1]);`;
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the 'hello' bundle has one module", function() {
@@ -66,7 +72,9 @@ describe("pakit test suite", function() {
     });
 
     it("then the 'world' bundle has the expected content", function() {
-      expect(trimResult(result.shards["world"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function r(e,n,o){function t(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module \'"+i+"\'");throw a.code="MODULE_NOT_FOUND",a}var l=n[i]={exports:{}};e[i][0].call(l.exports,function(r){var n=e[i][1][r];return t(n||r)},l,l.exports,r,e,n,o)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<o.length;i++)t(o[i]);return t}({3:[function(r,e,n){"use strict";console.log("world")},{}]},{},[3]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = escapeChars(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(r,e){var t={};function n(e){if(!t.hasOwnProperty(e)){var i={exports:{}},f=r[e][0],u=r[e][1];t[e]=i.exports,f((a=u,function(r){var e=a[r];if(o(e))return n(e);for(var t=n.next;t;t=t.next)if(t.has(e))return t.get(e);for(var i=n.prev;i;i=i.prev)if(i.has(e))return i.get(e);throw new Error("Module '"+r+"' with id "+e+" was not found")}),i,i.exports),t[e]=i.exports}var a;return t[e]}function o(e){return r[e]}if(n.get=n,n.has=o,n.next="undefined"==typeof _bb$iter?null:_bb$iter,e.length)for(var i=n,f=n.next;f;)f.prev=i,i=f,f=f.next;return e.forEach(n),n}({1:[function(r,e,t){"use strict";r("./hello"),console.log(" == "),r("./world")},{"./hello":2,"./world":3}]},[1]);`);
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the 'world' bundle has one module", function() {
@@ -85,7 +93,9 @@ describe("pakit test suite", function() {
     });
 
     it("then content of the 'main' shard with correct  value", function() {
-      expect(trimResult(result.shards["main"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function e(o,t,n){function r(s,i){if(!t[s]){if(!o[s]){var u="function"==typeof require&&require;if(!i&&u)return u(s,!0);if(l)return l(s,!0);var c=new Error("Cannot find module \'"+s+"\'");throw c.code="MODULE_NOT_FOUND",c}var f=t[s]={exports:{}};o[s][0].call(f.exports,function(e){var t=o[s][1][e];return r(t||e)},f,f.exports,e,o,t,n)}return t[s].exports}for(var l="function"==typeof require&&require,s=0;s<n.length;s++)r(n[s]);return r}({1:[function(e,o,t){"use strict";e("./hello"),console.log(" == "),e("./world")},{"./hello":2,"./world":3}],2:[function(e,o,t){"use strict";e("./hello.css"),e("./hello.json"),console.log("hello")},{"./hello.css":4,"./hello.json":5}],3:[function(e,o,t){"use strict";console.log("world")},{}],4:[function(e,o,t){e("$bit-loader-css/loadstyle")(".hello {\\n  color: blue;\\n}\\n")},{"$bit-loader-css/loadstyle":6}],5:[function(e,o,t){o.exports={hello:"json"}},{}],6:[function(e,o,t){o.exports=function(e){var o=document.getElementsByTagName("head")[0],t=document.createElement("style");t.setAttribute("type","text/css"),t.innerHTML=e,o.appendChild(t)}},{}]},{},[1]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = escapeChars(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(e,t){var o={};function n(t){if(!o.hasOwnProperty(t)){var l={exports:{}},s=e[t][0],i=e[t][1];o[t]=l.exports,s((u=i,function(e){var t=u[e];if(r(t))return n(t);for(var o=n.next;o;o=o.next)if(o.has(t))return o.get(t);for(var l=n.prev;l;l=l.prev)if(l.has(t))return l.get(t);throw new Error("Module '"+e+"' with id "+t+" was not found")}),l,l.exports),o[t]=l.exports}var u;return o[t]}function r(t){return e[t]}if(n.get=n,n.has=r,n.next="undefined"==typeof _bb$iter?null:_bb$iter,t.length)for(var l=n,s=n.next;s;)s.prev=l,l=s,s=s.next;return t.forEach(n),n}({1:[function(e,t,o){"use strict";e("./hello"),console.log(" == "),e("./world")},{"./hello":2,"./world":3}],2:[function(e,t,o){"use strict";e("./hello.css"),e("./hello.json"),console.log("hello")},{"./hello.css":4,"./hello.json":5}],3:[function(e,t,o){"use strict";console.log("world")},{}],4:[function(e,t,o){e("$bit-loader-css/loadstyle")(".hello {\n  color: blue;\n}\n")},{"$bit-loader-css/loadstyle":6}],5:[function(e,t,o){t.exports={hello:"json"}},{}],6:[function(e,t,o){t.exports=function(e){var t=document.getElementsByTagName("head")[0],o=document.createElement("style");o.setAttribute("type","text/css"),o.innerHTML=e,t.appendChild(o)}},{}]},[1]);`);
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the result has 6 module", function() {
@@ -106,7 +116,9 @@ describe("pakit test suite", function() {
     });
 
     it("then content of the 'main' shard with correct  value", function() {
-      expect(trimResult(result.shards["main"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function r(e,n,o){function t(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var l=new Error("Cannot find module \'"+i+"\'");throw l.code="MODULE_NOT_FOUND",l}var a=n[i]={exports:{}};e[i][0].call(a.exports,function(r){var n=e[i][1][r];return t(n||r)},a,a.exports,r,e,n,o)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<o.length;i++)t(o[i]);return t}({1:[function(r,e,n){console.log("hello world - content")},{}]},{},[1]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = escapeChars(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(r,e){var t={};function n(e){if(!t.hasOwnProperty(e)){var f={exports:{}},i=r[e][0],u=r[e][1];t[e]=f.exports,i((a=u,function(r){var e=a[r];if(o(e))return n(e);for(var t=n.next;t;t=t.next)if(t.has(e))return t.get(e);for(var f=n.prev;f;f=f.prev)if(f.has(e))return f.get(e);throw new Error("Module '"+r+"' with id "+e+" was not found")}),f,f.exports),t[e]=f.exports}var a;return t[e]}function o(e){return r[e]}if(n.get=n,n.has=o,n.next="undefined"==typeof _bb$iter?null:_bb$iter,e.length)for(var f=n,i=n.next;i;)i.prev=f,f=i,i=i.next;return e.forEach(n),n}({1:[function(r,e,t){console.log("hello world - content")},{}]},[1]);`);
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the result has one module", function() {
@@ -127,7 +139,9 @@ describe("pakit test suite", function() {
     });
 
     it("then content of the 'main' shard with correct  value", function() {
-      expect(trimResult(result.shards["main"].content)).to.be.contain(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=function e(o,n,t){function r(s,i){if(!n[s]){if(!o[s]){var u="function"==typeof require&&require;if(!i&&u)return u(s,!0);if(l)return l(s,!0);var c=new Error("Cannot find module \'"+s+"\'");throw c.code="MODULE_NOT_FOUND",c}var f=n[s]={exports:{}};o[s][0].call(f.exports,function(e){var n=o[s][1][e];return r(n||e)},f,f.exports,e,o,n,t)}return n[s].exports}for(var l="function"==typeof require&&require,s=0;s<t.length;s++)r(t[s]);return r}({1:[function(e,o,n){e("./hello"),console.log(" == "),e("./world")},{"./hello":2,"./world":3}],2:[function(e,o,n){"use strict";e("./hello.css"),e("./hello.json"),console.log("hello")},{"./hello.css":4,"./hello.json":5}],3:[function(e,o,n){"use strict";console.log("world")},{}],4:[function(e,o,n){e("$bit-loader-css/loadstyle")(".hello {\\n  color: blue;\\n}\\n")},{"$bit-loader-css/loadstyle":6}],5:[function(e,o,n){o.exports={hello:"json"}},{}],6:[function(e,o,n){o.exports=function(e){var o=document.getElementsByTagName("head")[0],n=document.createElement("style");n.setAttribute("type","text/css"),n.innerHTML=e,o.appendChild(n)}},{}]},{},[1]);`);
+      const actual = removeToIndexOf(trimResult(result.shards["main"].content), "Miguel Castillo <manchagnu@gmail.com>");
+      const expected = escapeChars(`Miguel Castillo <manchagnu@gmail.com>. Licensed under MIT */require=_bb$iter=function(e,t){var o={};function n(t){if(!o.hasOwnProperty(t)){var l={exports:{}},s=e[t][0],i=e[t][1];o[t]=l.exports,s((u=i,function(e){var t=u[e];if(r(t))return n(t);for(var o=n.next;o;o=o.next)if(o.has(t))return o.get(t);for(var l=n.prev;l;l=l.prev)if(l.has(t))return l.get(t);throw new Error("Module '"+e+"' with id "+t+" was not found")}),l,l.exports),o[t]=l.exports}var u;return o[t]}function r(t){return e[t]}if(n.get=n,n.has=r,n.next="undefined"==typeof _bb$iter?null:_bb$iter,t.length)for(var l=n,s=n.next;s;)s.prev=l,l=s,s=s.next;return t.forEach(n),n}({1:[function(e,t,o){e("./hello"),console.log(" == "),e("./world")},{"./hello":2,"./world":3}],2:[function(e,t,o){"use strict";e("./hello.css"),e("./hello.json"),console.log("hello")},{"./hello.css":4,"./hello.json":5}],3:[function(e,t,o){"use strict";console.log("world")},{}],4:[function(e,t,o){e("$bit-loader-css/loadstyle")(".hello {\n  color: blue;\n}\n")},{"$bit-loader-css/loadstyle":6}],5:[function(e,t,o){t.exports={hello:"json"}},{}],6:[function(e,t,o){t.exports=function(e){var t=document.getElementsByTagName("head")[0],o=document.createElement("style");o.setAttribute("type","text/css"),o.innerHTML=e,t.appendChild(o)}},{}]},[1]);`);
+      expect(actual).to.be.equal(expected);
     });
 
     it("then the result has 6 module", function() {
@@ -141,4 +155,12 @@ function trimResult(data) {
     .toString()
     .replace(/\n/g, "")
     .replace(/\/\/# sourceMappingURL=.*/, "");
+}
+
+function removeToIndexOf(str, pattern) {
+  return str.substr(str.indexOf(pattern));
+}
+
+function escapeChars(str) {
+  return str.replace(/\n/g, "\\n");
 }
