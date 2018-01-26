@@ -11,6 +11,7 @@ const defaultLoaderPlugins = [
   "httpresource",
   "shimmer",
   "eslint",
+  "sourcemaps",
   "js",
   "css",
   "json",
