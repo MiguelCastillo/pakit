@@ -1,0 +1,33 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "pakit examples",
+  "main": "basic.js",
+  "scripts": {
+    "assets": "cpx 'src/**/*.html' dist",
+    "build": "pakit --src src/main.jsx --dest dist/index.js",
+    "server": "3dub",
+    "analyze": "source-map-explorer dist/bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "pm2 start dev.config.js",
+    "stop": "pm2 delete assets server build",
+    "restart": "npm stop && npm start",
+    "monit": "pm2 monit",
+    "logs": "pm2 logs"
+  },
+  "author": "Miguel Castillo <manchagnu@gmail.com>",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "3dub": "^1.1.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "pakit": "latest",
+    "cpx": "^1.5.0",
+    "eslint-plugin-react": "^7.5.1",
+    "pm2": "^2.9.3",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "source-map-explorer": "^1.5.0"
+  }
+}
