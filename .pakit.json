@@ -7,6 +7,7 @@
 
   "eslint": { "extensions": ["js"] },
 
+  "sourcemaps": {},
   "js": { "extensions": ["js"] },
   "css": { "extensions": ["css"] },
   "json": { "extensions": ["json"] },
