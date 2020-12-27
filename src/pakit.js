@@ -1,5 +1,5 @@
 const utils = require("belty");
-const Bitbundler = require("bit-bundler");
+const Bitbundler = require("@bit/bundler");
 const resolveModule = require("./resolveModule");
 const pakitDefaultOptionsBuilder = require("./options/pakit");
 const loaderDefaultOptionsBuilder = require("./options/loader");
@@ -53,7 +53,7 @@ function configureLoaderPlugins(configurations) {
         Object.assign({}, defaultLoaderOptions[plugin], configurations[plugin]) :
         configurations[plugin];
 
-      return [resolveModule("bit-loader-" + plugin),(settings)];
+      return [resolveModule("@bit/loader-" + plugin),(settings)];
     });
 }
 
@@ -61,18 +61,18 @@ function configureBundlerPlugins(configurations) {
   var plugins = []
   
   if (Object.keys(configurations.shards).length) {
-    plugins.push([resolveModule("bit-bundler-splitter"), configureShards(configurations.shards)]);
+    plugins.push([resolveModule("@bit/bundler-splitter"), configureShards(configurations.shards)]);
   }
 
   if (configurations.minify !== false) {
-    plugins.push([resolveModule("bit-bundler-minifyjs"), Object.assign({ output: {
+    plugins.push([resolveModule("@bit/bundler-minifyjs"), Object.assign({ output: {
       beautify: false,
       preamble: stringBannerBuilder()
     }}, configurations.minify)]);
   }
 
   if (configurations.extractsm !== false) {
-    plugins.push([resolveModule("bit-bundler-extractsm"), configurations.extractsm]);
+    plugins.push([resolveModule("@bit/bundler-extractsm"), configurations.extractsm]);
   }
 
   return plugins;
