@@ -14,11 +14,21 @@ Object.keys(argv).forEach(function(key) {
   );
 });
 
-bundler({
-  content: argv.content,
-  path: argv.path,
-  src: [].concat(argv._).concat(argv.src).concat(argv.files).filter(Boolean),
-  dest: argv.dest || argv.out || path.join(process.cwd(), "dist/out.js")
-}, 
-  utils.omit(argv, ["content", "path", "src", "files", "dest"])
-);
+if (argv.config) {
+  const config = require(path.join(process.cwd(), argv.config));
+
+  bundler(
+    utils.pick(config, ["content", "path", "src", "files", "dest"]),
+    utils.omit(config, ["content", "path", "src", "files", "dest"]),
+  );
+}
+else {
+  bundler({
+    content: argv.content,
+    path: argv.path,
+    src: [].concat(argv._).concat(argv.src).concat(argv.files).filter(Boolean),
+    dest: argv.dest || argv.out || path.join(process.cwd(), "dist/out.js")
+  }, 
+    utils.omit(argv, ["content", "path", "src", "files", "dest"])
+  );
+}
