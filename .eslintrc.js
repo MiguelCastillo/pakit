@@ -1,8 +1,10 @@
 module.exports = {
     "parserOptions": {
-        "ecmaVersion": 2015
+        "ecmaVersion": "latest",
+        "sourceType": "module",
     },
     "env": {
+        "es6": true,
         "browser": true,
         "commonjs": true
     },
@@ -18,9 +20,9 @@ module.exports = {
         "semi": 0,
         "global-strict": 0,
         "wrap-iife": [2, "inside"],
-        "quotes": [1, "double"],
+        "quotes": [1, "double", { "avoidEscape": true, "allowTemplateLiterals": true }],
         "key-spacing": 0,
         "no-trailing-spaces": 0,
         "eol-last": 2
-      }    
+      }
 };

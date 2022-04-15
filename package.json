@@ -7,7 +7,7 @@
     "pakit": "./bin/cli.js"
   },
   "scripts": {
-    "test": "eslint src/**/*.js test/**/*.js && mocha --require babel-register"
+    "test": "eslint src/**/*.js test/**/*.js && jest"
   },
   "repository": {
     "type": "git",
@@ -42,15 +42,15 @@
     "@bit/loader-sourcemaps": "^0.1.2",
     "belty": "^5.2.2",
     "chalk": "^4.1.0",
-    "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
+    "fs-extra": "^10.0.1",
+    "glob": "^8.0.1",
     "jest": "^27.5.1",
-    "resolve": "^1.19.0",
+    "resolve": "^1.22.0",
     "subarg": "^1.0.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
-    "eslint": "^7.16.0"
+    "eslint": "^8.13.0"
   }
 }
