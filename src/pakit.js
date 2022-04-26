@@ -53,13 +53,19 @@ function configureLoaderPlugins(configurations) {
         Object.assign({}, defaultLoaderOptions[plugin], configurations[plugin]) :
         configurations[plugin];
 
+      // configurations can provide a function that will return a loader plugin,
+      // which is how folks can define custom loader plugins.
+      if (typeof settings === "function") {
+        return settings();
+      }
+
       return [resolveModule("@bit/loader-" + plugin),(settings)];
     });
 }
 
 function configureBundlerPlugins(configurations) {
   var plugins = []
-  
+
   if (Object.keys(configurations.shards).length) {
     plugins.push([resolveModule("@bit/bundler-splitter"), configureShards(configurations.shards)]);
   }

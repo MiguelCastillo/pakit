@@ -50,12 +50,6 @@ An important feature is being as unobtrusive as possible. You configure eslint a
   - file watching.
   - caching to maximize startup times.
 
-
-# dependencies
-
-You do not need to install any dependencies in your project for `pakit` to work. Meaning, you do not need to install/maintain `babel` or `eslint` unless you really want to. `pakit` accomplishes this by first trying to use dependencies from your project. Any dependencies that aren't found in your project `pakit` will subtitute with its own. This creates an *opt-in* system if you want to take more granular control of the situation by simply installing in your project the dependencies you want to manage.
-
-
 # config file or directory
 
 The default setup is defined in this [.pakit.json](https://github.com/MiguelCastillo/pakit/blob/master/.pakit.json). Beyond that, you can define pakit settings in your projects in three different forms.
@@ -84,7 +78,7 @@ Below is a sample configuration where pakit will split all modules with `/node_m
 }
 ```
 
-Bundle splitting is fundamentally based on pattern matching. Meaning that you can build matching rules that determine how bundles are split up. The example below splits out modules that match the names "jquery" and "react".
+Bundle splitting is fundamentally based on pattern matching. Meaning that you can build matching rules that determine how bundles are split up. The example below splits out modules that match the names "jquery" and "react", and the bundle is written to `dist/requery.js`.
 
 ``` javascript
 {
@@ -113,6 +107,62 @@ When bundles are written for the browser, please use `umd` for better compatibil
 }
 ```
 
+## loader plugins
+
+`pakit` uses `bit-loader` plugins to process your assets; resolve dependencies, transform your sources files, build sourcemaps, and more. `pakit` out of the box comes with a curated list of loader already configured so that you don't have to tweak too much.
+
+But if you need to configure a loader, you can do so in a `loaders` object with the names of the plugins you wish to configure.
+
+The contrived example below configures the `excludes` loader to stub out the module named `node-fetch`.
+
+``` javascript
+{
+  "loaders": {
+    "excludes": ["node-fetch"]
+  }
+}
+```
+
+Besides all the loaders that `pakit` comes with you can also define your own! You can do that by providing a function that returns your plugin implementation. For example, in your `.pakit.js` you can specify an `envify` custom plugin like so:
+
+``` javascript
+{
+  "loaders": {
+    "envify": () => envReplace("production"),
+  }
+}
+
+// Plugin factory
+function envReplace(value) {
+  // Plugin object definition to hook into the `transformation`
+  // stage to process your source.
+  return {
+    transform: (meta) => {
+      return {
+        source: meta.source.replace(/process\.env\.NODE_ENV/g, JSON.stringify(value))
+      };
+    }
+  };
+}
+```
+
+`pakit` will call your `envify` function to get your plugin.  You can find more information for writing loader plugins [here](https://github.com/MiguelCastillo/bit-loader#plugins).
+
+The list of loader shipped with `pakit` are:
+- [excludes](https://github.com/MiguelCastillo/bit-loader-excludes)
+- [extensions](https://github.com/MiguelCastillo/bit-loader-extensions)
+- [httpresource](https://github.com/MiguelCastillo/bit-loader-httpresource)
+- [shimmer](https://github.com/MiguelCastillo/bit-loader-shimmer)
+- [eslint](https://github.com/MiguelCastillo/bit-loader-eslint)
+- [sourcemaps](https://github.com/MiguelCastillo/bit-loader-sourcemaps)
+- [js](https://github.com/MiguelCastillo/bit-loader-js)
+- [css](https://github.com/MiguelCastillo/bit-loader-css)
+- [json](https://github.com/MiguelCastillo/bit-loader-json)
+- [babel](https://github.com/MiguelCastillo/bit-loader-babel)
+- [builtins](https://github.com/MiguelCastillo/bit-loader-builtins)
+- [remove](https://github.com/MiguelCastillo/bit-loader-remove)
+- [cache](https://github.com/MiguelCastillo/bit-loader-cache)
+
 
 ## babel presets and plugins
 
@@ -125,7 +175,6 @@ While pakit wires in `babel`, it is not configured with any presets or plugins. 
 ```
 $ npm install babel-preset-es2015 babel-preset-react --save-dev
 ```
-
 
 #### configure a `.babelrc` in your project
 
