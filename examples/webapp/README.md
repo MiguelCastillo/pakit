@@ -7,7 +7,7 @@ The webapp example illustrates how we can put together a build system with a few
 - bundling with (of course) [bit-bundler](https://github.com/MiguelCastillo/bit-bundler)
 - process management with [pm2](https://github.com/Unitech/pm2)
 
-The configuration in the setup is designed to be resillient, modular, and scalable. Why this approach? Simple. After working with several build systems that couple all the pieces together under a single unified system, a few things happen:
+The configuration in the setup is designed to be resilient, modular, and scalable. Why this approach? Simple. After working with several build systems that couple all the pieces together under a single unified system, a few things happen:
 
 1. One piece breaks, everything goes down.
 2. Plugins that wrap tools that are unrelated cause friction in your setup.
