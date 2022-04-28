@@ -96,12 +96,27 @@ Matching rules can match anything in a Module instance, including the `source`.
 
 > All matchers are internally converted to regular expressions with the exception of `extensions`, which are processed as a string.
 
+## minify
+
+There is support out of the box for minification with [UglifyJS2](https://github.com/mishoo/UglifyJS2). So you can specify your own minification options in your pakit's configuration.
+
+``` javascript
+{
+  "minify": {
+    "compress": {
+      "drop_debugger": false,
+    },
+  },
+}
+```
+
+Or entirely disable minification with `minify: false` in your configuration. This is recommended during development because it speeds things up and provides better debugging experience with tools like the react `Components` chrome extension.
 
 ## umd
 
 When bundles are written for the browser, please use `umd` for better compatibility among module systems. This will ensure that the bundle exposes the main modules as AMD, CJS, or plain ole global depdending on the module system that is available.
 
-```
+``` javascript
 {
   "umd": "myModuleName"
 }
@@ -178,7 +193,7 @@ $ npm install babel-preset-es2015 babel-preset-react --save-dev
 
 #### configure a `.babelrc` in your project
 
-```
+``` javascript
 {
   "presets": ["es2015", "react"]
 }
